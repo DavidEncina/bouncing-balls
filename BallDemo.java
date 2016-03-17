@@ -31,7 +31,9 @@ public class BallDemo
         Random r = new Random();
         Random g = new Random();
         Random b = new Random();
-        Random diametro = new Random();       
+        Random diametro = new Random();
+        Random posicionX = new Random();
+        Random posicionY = new Random();
         
         int ground = 400;   // position of the ground line
 
@@ -41,15 +43,12 @@ public class BallDemo
         myCanvas.drawLine(50, ground, 550, ground);
 
         // crate and show the balls
-        int posicionX = 50;
-        int posicionY = 50;
+        
         for (int i = 0; i < numeroBolas; i++) {
             Color color = new Color(r.nextInt(256), g.nextInt(256), b.nextInt(256));
-            BouncingBall ball = new BouncingBall(posicionX, posicionY, (diametro.nextInt(80)), color, ground, myCanvas);
+            BouncingBall ball = new BouncingBall(posicionX.nextInt(70), posicionY.nextInt(70), (diametro.nextInt(80)), color, ground, myCanvas);
             ball.draw();
-            listaBolas.add(ball);
-            posicionX += 5;
-            posicionY -= 5;
+            listaBolas.add(ball);            
         }
         
         // make them bounce
