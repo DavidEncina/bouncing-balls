@@ -86,10 +86,11 @@ public class BallDemo
         Random diametro = new Random();
         Random posicionX = new Random();
         Random posicionY = new Random();
+        Random direccion = new Random();
         
         for (int i = 0; i < numeroBolas; i++) {
             Color color = new Color(r.nextInt(256), g.nextInt(256), b.nextInt(256));
-            BoxBall ball = new BoxBall(posicionX.nextInt(70) + 81, posicionY.nextInt(70) + 81, (diametro.nextInt(80)), color, ground, myCanvas, false);
+            BoxBall ball = new BoxBall(posicionX.nextInt(70) + 81, posicionY.nextInt(70) + 81, (diametro.nextInt(80)), color, ground, myCanvas, direccion.nextBoolean());
             ball.draw();
             listaBolas.add(ball);            
         }
