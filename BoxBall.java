@@ -21,7 +21,8 @@ public class BoxBall
     private final int groundPosition;      // y position of ground
     private Canvas canvas;
     private int ySpeed = 1;                // initial downward speed
-    private boolean direccion;
+    private boolean direccion1;
+    private boolean direccion2;
 
     /**
      * Constructor for objects of class BouncingBall
@@ -42,7 +43,8 @@ public class BoxBall
         diameter = ballDiameter;
         groundPosition = groundPos;
         canvas = drawingCanvas;
-        this.direccion = direccion;
+        direccion1 = direccion;
+        direccion2 = false;
     }
 
     /**
@@ -71,21 +73,30 @@ public class BoxBall
         erase();
 
         // compute new position
-        if(direccion){
+        if(direccion2){
             yPosition += ySpeed;
         }
         else
         {
             yPosition -= ySpeed;
         }
-
-        // check if it has hit the ground
-        if(((xPosition <= 20) || ((xPosition  >= 400 - diameter)))) {
-            direccion = !direccion;
+        
+        if(!direccion1)
+        {
+            xPosition +=1;
+        }
+        else
+        {
+            xPosition -=1;
         }
 
+        // comprueba si toca el rectangulo
+        if(((xPosition <= 20) || ((xPosition  >= 400 - diameter)))) {
+            direccion1 = !direccion1;
+        }
+        
         if(((yPosition <= 20)) || ((yPosition  >= 400- diameter))){
-            direccion = !direccion;
+            direccion2 = !direccion2;
         }
         
         // draw again at new position
