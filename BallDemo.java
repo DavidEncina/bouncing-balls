@@ -89,7 +89,7 @@ public class BallDemo
         
         for (int i = 0; i < numeroBolas; i++) {
             Color color = new Color(r.nextInt(256), g.nextInt(256), b.nextInt(256));
-            BoxBall ball = new BoxBall(posicionX.nextInt(70), posicionY.nextInt(70), (diametro.nextInt(80)), color, ground, myCanvas);
+            BoxBall ball = new BoxBall(posicionX.nextInt(70) + 81, posicionY.nextInt(70) + 81, (diametro.nextInt(80)), color, ground, myCanvas, false);
             ball.draw();
             listaBolas.add(ball);            
         }
@@ -98,11 +98,7 @@ public class BallDemo
         while(!finished) {
             myCanvas.wait(50);           // small delay
             for (int i = 0; i < listaBolas.size(); i++) {
-                listaBolas.get(i).move();
-                // stop once ball has travelled a certain distance on x axis
-                if(listaBolas.get(i).getXPosition() >= 550) {
-                    finished = true;
-                }
+                listaBolas.get(i).move();                
             }            
         }
     }

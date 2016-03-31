@@ -10,9 +10,9 @@ import java.awt.geom.*;
 public class BoxBall
 {
 
-    private static final int GRAVITY = 3;  // effect of gravity
+    private static final int GRAVITY = 0;  // effect of gravity
 
-    private int ballDegradation = 2;
+    private int ballDegradation = 0;
     private Ellipse2D.Double circle;
     private Color color;
     private int diameter;
@@ -21,6 +21,7 @@ public class BoxBall
     private final int groundPosition;      // y position of ground
     private Canvas canvas;
     private int ySpeed = 1;                // initial downward speed
+    private boolean direccion;
 
     /**
      * Constructor for objects of class BouncingBall
@@ -33,7 +34,7 @@ public class BoxBall
      * @param drawingCanvas  the canvas to draw this ball on
      */
     public BoxBall(int xPos, int yPos, int ballDiameter, Color ballColor,
-    int groundPos, Canvas drawingCanvas)
+    int groundPos, Canvas drawingCanvas, boolean direccion)
     {
         xPosition = xPos;
         yPosition = yPos;
@@ -41,6 +42,7 @@ public class BoxBall
         diameter = ballDiameter;
         groundPosition = groundPos;
         canvas = drawingCanvas;
+        this.direccion = direccion;
     }
 
     /**
@@ -69,19 +71,26 @@ public class BoxBall
         erase();
 
         // compute new position
-        ySpeed += GRAVITY;
-        yPosition += ySpeed;
-        xPosition +=2;
-
-        // check if it has hit the ground
-        if(yPosition >= (groundPosition - diameter) && ySpeed > 0) {
-            yPosition = (int)(groundPosition - diameter);
-            ySpeed = -ySpeed + ballDegradation; 
+        if(direccion){
+            yPosition += ySpeed;
+        }
+        else
+        {
+            yPosition -= ySpeed;
         }
 
+        // check if it has hit the ground
+        if(((xPosition <= 20) || ((xPosition  >= 400 - diameter)))) {
+            direccion = !direccion;
+        }
+
+        if(((yPosition <= 20)) || ((yPosition  >= 400- diameter))){
+            direccion = !direccion;
+        }
+        
         // draw again at new position
         draw();
-    }    
+    }
 
     /**
      * return the horizontal position of this ball
